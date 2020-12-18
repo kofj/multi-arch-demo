@@ -5,6 +5,7 @@ import (
 	"runtime"
 
 	"github.com/gin-gonic/gin"
+	"github.com/kofj/multi-arch/cmd/info"
 )
 
 var (
@@ -19,9 +20,11 @@ func main() {
 
 func indexHandler(c *gin.Context) {
 	var osinfo = map[string]string{
-		"arch":    runtime.GOARCH,
-		"os":      runtime.GOOS,
-		"version": runtime.Version(),
+		"GoVersion":  runtime.Version(),
+		"BuildArch":  info.BuildArch,
+		"BuildOS":    info.BuildOS,
+		"RuningArch": runtime.GOARCH,
+		"RuningOS":   runtime.GOOS,
 	}
 	c.JSON(http.StatusOK, osinfo)
 }
